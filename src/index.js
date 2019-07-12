@@ -43,12 +43,12 @@ client.on('open', () => {
     // console.log(JSON.stringify(data));
     client.send(JSON.stringify(data));
 });
-
 client.on('message', message =>{
     const data = JSON.parse(message);
 
     if(data.vehicleNo === APOLLO_VEHICLE_NUMBER){
         const type = data.type;
+        console.log(type);
 
         switch(type){
             case 'cidiv2x':
@@ -57,13 +57,17 @@ client.on('message', message =>{
             case 'chasis':
                 // console.log(data);
                 break;
+            case 'delays':
+                // console.log(data);
+                break;
+            case 'vehicleState':
+                break;
             default:
                 // console.log(type);
                 break;
         }
     }else {
-        // console.log(data);
-
+        console.log(data.vehicleNo);
     }
 
 
