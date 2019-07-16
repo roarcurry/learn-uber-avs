@@ -1,7 +1,6 @@
 export const APOLLO_SOCKET_HOST = '183.214.189.253';
 export const APOLLO_SOCKET_PORT = 7777;
-export const APOLLO_SOCKET_NAME = 'vehicleNo';
-export const APOLLO_VEHICLE_NUMBER = '湘A18915';
+
 
 export const MESSAGE_TYPE = {
     cidiv2x: 1,
@@ -18,5 +17,6 @@ export const MESSAGE_TYPE = {
     adc_trajectory: 1,
     systemStatus: 1,
     planningAction: 1,
-    staticInfo: 1
+    staticInfo: 1,
 };
+

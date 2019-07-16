@@ -1,0 +1,15 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "uber-es2015",
+    "prettier"
+  ],
+  "rules": {
+    "guard-for-in": 0,
+    "no-inline-comments": 0,
+    "linebreak-style": [0 ,"error", "windows"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  }
+}
