@@ -67,6 +67,12 @@ export class XVIZServerMiddlewareStack {
     this.middlewareDispatch('onReconfigure', msg);
   }
 
+  // 直接发送
+  onJustSend(msg) {
+    this.middlewareDispatch('onJustSend', msg);
+  }
+
+
   middlewareDispatch(name, msg) {
     const arrayLength = this.middlewares.length;
     for (let i = 0; i < arrayLength; i++) {

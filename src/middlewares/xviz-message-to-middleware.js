@@ -85,6 +85,11 @@ export class XVIZMessageToMiddleware {
         this.middleware.onError(msg);
         break;
 
+      // 直接发送
+      case 'just_send':
+        this.middleware.onJustSend(msg);
+        break;
+
       default:
         const message = `Error: unknown XVIZ message type ${xvizType}`;
         this.middleware.onError({type: 'xviz/error', data: {message}});

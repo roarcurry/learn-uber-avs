@@ -24,21 +24,12 @@ export class XVIZProviderHandler {
         this.sessionCount = 0;
     }
 
-    async newSession(socket, req, source) {
-        let provider = null;
+    async newSession(socket, req) {
 
-        // TODO: reconsile cli options with request options
-        provider = new XVIZJSONProvider({source, options: {...req.params, logger: this.options.logger}});
-
-        if (provider) {
-            return new XVIZProviderSession(socket, req, provider, {
-                ...this.options,
-                id: this.sessionCount++
-            });
-        }
-
-        this.options.logger.log('[> Provider] no provider found');
-        return null;
+        return new XVIZProviderSession(socket, req, {
+            ...this.options,
+            id: this.sessionCount++
+        });
 
     }
 }

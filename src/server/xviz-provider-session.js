@@ -29,11 +29,11 @@ import {XVIZSessionContext} from '../middlewares/xviz-session-context';
 //   add data (custom) for messages, they could try to handle first,
 //   else send to XVIZ
 export class XVIZProviderSession {
-    constructor(socket, request, provider, options) {
+    constructor(socket, request, options) {
         this.socket = socket;
         this.request = request;
-        this.provider = provider;
         this.options = options;
+
         this.middleware = null;
 
         // session shared storage for the middlewares
@@ -84,7 +84,7 @@ export class XVIZProviderSession {
         this.middleware = new XVIZServerMiddlewareStack();
 
         const stack = [
-            new XVIZProviderRequestHandler(this.context, this.provider, this.middleware, this.options),
+            new XVIZProviderRequestHandler(this.context, this.middleware, this.options),
             new XVIZWebsocketSender(this.context, this.socket, this.options)
         ];
         this.middleware.set(stack);
@@ -119,7 +119,7 @@ export class XVIZProviderSession {
 
         if (params.session_type === 'live') {
             // If 'live' we start sending data immediately
-            this.handler.callMiddleware('transform_log', {id: 'live', ...params});
+            // this.handler.callMiddleware('transform_log', {id: 'live', ...params});
         }
     }
 }

@@ -16,6 +16,8 @@
 import {Stats} from 'probe.gl';
 import {XVIZEnvelope} from '@xviz/io';
 
+import {MetaData} from "../converter/metaData";
+
 const DEFAULT_OPTIONS = {
   delay: 0 // time in milliseconds
 };
@@ -24,10 +26,12 @@ const DEFAULT_OPTIONS = {
 // to a request with data from a provider, processing
 // the data through the supplied middleware
 export class XVIZProviderRequestHandler {
-  constructor(context, provider, middleware, options = {}) {
+  constructor(context, middleware, options = {}) {
     this.context = context;
-    this.provider = provider;
+
     this.middleware = middleware;
+
+    this.metadata = MetaData;
 
     this.metrics = new Stats({id: 'xviz-provider-request-handler'});
     this.options = Object.assign({}, DEFAULT_OPTIONS, options);
@@ -39,8 +43,7 @@ export class XVIZProviderRequestHandler {
     // TODO: make a context specific 'configuration' methods
     // this.context.set('providerSettings', this.provider.settings());
 
-    this.provider.init();
-    const metadata = this.provider.xvizMetadata().message();
+    const metadata = this.metadata;
     if (metadata && metadata.data && metadata.data.log_info) {
       const {start_time, end_time} = metadata.data.log_info;
       if (start_time) {
@@ -83,7 +86,7 @@ export class XVIZProviderRequestHandler {
     }
 
     // send metadata
-    const metadata = this.provider.xvizMetadata();
+    const metadata = this.metadata;
     this.middleware.onMetadata(metadata);
   }
 
@@ -248,5 +251,11 @@ export class XVIZProviderRequestHandler {
         logger.info(`${msg} ${total.name} ${total.lastTiming.toFixed(3)}ms`);
       }
     }
+  }
+
+
+  // 直接发送
+  onJustSend(msg){
+    this.middleware.onStateUpdate(msg);
   }
 }

@@ -66,13 +66,14 @@ export class XVIZServer {
         const req = getRequestData(request.url);
 
         // TODO: 连接本地 websocket 接收数据并转换为 XVIZ DATA
-        const wsc = new WSC(req.params.vehicleNo);
-        const source = wsc.converter.source;
 
         for (const handler of this.handlers) {
-            const session = await handler.newSession(socket, req, source);
+            const session = await handler.newSession(socket, req);
             if (session) {
                 session.onConnect();
+
+                const wsc = new WSC(req.params.vehicleNo, session);
+
                 return;
             }
         }

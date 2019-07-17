@@ -1,7 +1,6 @@
 export const APOLLO_SOCKET_HOST = '183.214.189.253';
 export const APOLLO_SOCKET_PORT = 7777;
 
-
 export const MESSAGE_TYPE = {
     cidiv2x: 1,
     vehicleState: 1,
