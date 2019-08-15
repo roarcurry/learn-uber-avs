@@ -1,5 +1,5 @@
 {
-  "name": "xviz",
+  "name": "xviz-server-test",
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
@@ -18,8 +18,9 @@
     "@xviz/parser": "^1.0.0-beta.16",
     "@xviz/schema": "^1.0.0-beta.16",
     "@xviz/server": "^1.0.0-beta.16",
-    "coordtransform": "^2.1.2",
+    "chncrs": "^0.1.6",
     "probe.gl": "^3.0.3",
+    "proj4": "^2.5.0",
     "ws": "^7.1.0"
   }
 }

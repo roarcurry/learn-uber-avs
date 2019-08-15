@@ -15,7 +15,9 @@
 const URL = require('url').URL;
 const WebSocket = require('ws');
 
-import {WSC} from "../converter/socketClient";
+import {WSC} from "../websocket/websocketClient";
+import {Sender} from "../utils/sender";
+import {SIMWORLD, CAMERA, POINTCLOUD} from "../constants";
 
 
 // Extract path and params from the request
@@ -65,14 +67,26 @@ export class XVIZServer {
         this.log(`[> Connection] created: ${request.url}`);
         const req = getRequestData(request.url);
 
-        // TODO: 连接本地 websocket 接收数据并转换为 XVIZ DATA
 
         for (const handler of this.handlers) {
             const session = await handler.newSession(socket, req);
             if (session) {
                 session.onConnect();
 
-                const wsc = new WSC(req.params.vehicleNo, session);
+                // TODO: 连接本地 websocket 接收数据并转换为 XVIZ DATA
+                const wsc = new WSC(session, this.options, req.params, SIMWORLD);
+                try{
+                    wsc.connect();
+                }catch (e) {
+                    console.log(e)
+                }
+                const wscCamera = new WSC(session, this.options, req.params, CAMERA);
+                wscCamera.connect();
+                const wscPointCloud = new WSC(session, this.options, req.params, POINTCLOUD);
+                wscPointCloud.connect();
+
+                const sender = new Sender(session);
+                setInterval(() => {sender.check()}, 100);
 
                 return;
             }

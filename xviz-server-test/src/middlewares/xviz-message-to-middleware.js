@@ -41,7 +41,7 @@ export class XVIZMessageToMiddleware {
       // we get is simple and instantiate the message immediately
       // We also need to do this to get the "type()"
       const xvizData = new XVIZData(message.data);
-      this.callMiddleware(xvizData.type, xvizData);
+      // this.callMiddleware(xvizData.type, xvizData);
       return true;
     }
 

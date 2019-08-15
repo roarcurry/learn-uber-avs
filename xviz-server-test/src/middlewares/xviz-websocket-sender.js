@@ -17,6 +17,7 @@ export class WebsocketSink {
   constructor(socket, options) {
     this.socket = socket;
     this.options = options;
+
   }
 
   writeSync(name, data) {
@@ -63,6 +64,8 @@ export class XVIZWebsocketSender {
     this.writerFormat = null;
 
     this._syncFormatWithWriter(this.format);
+
+    this.count = 0;
   }
 
   log(...msg) {
@@ -140,9 +143,10 @@ export class XVIZWebsocketSender {
       this.sink.writeSync('2-frame', msg.buffer);
     } else {
       this._syncFormatWithWriter(format);
-      this.writer.writeMessage(0, msg);
+      this.writer.writeMessage(this.count++, msg);
     }
   }
+
 
   onTransformLogDone(msg) {
     // TODO: This message is almost always just a plain object

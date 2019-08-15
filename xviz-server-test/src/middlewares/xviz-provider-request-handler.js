@@ -16,7 +16,7 @@
 import {Stats} from 'probe.gl';
 import {XVIZEnvelope} from '@xviz/io';
 
-import {MetaData} from "../converter/metaData";
+import {MetaData} from "../utils/metaData";
 
 const DEFAULT_OPTIONS = {
   delay: 0 // time in milliseconds
