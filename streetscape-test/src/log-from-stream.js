@@ -29,8 +29,8 @@ export default new XVIZStreamLoader({
     serverConfig: {
         defaultLogLength: 10,
         // serverUrl: 'ws://localhost:8081'
-        serverUrl: 'ws://localhost:3000'
-        // serverUrl: 'ws://172.18.1.76:8081'
+        // serverUrl: 'ws://localhost:3000'
+        serverUrl: 'ws://172.16.50.247:8081'
         // serverUrl: 'ws://172.18.1.76:8090'
     },
     worker: true,
